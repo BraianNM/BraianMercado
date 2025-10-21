@@ -1,15 +1,15 @@
 :root {
-    --primary: #005B9C;
-    --primary-dark: #004a7c;
-    --primary-light: #0078c8;
-    --secondary: #00D4AA;
-    --accent: #FFD166;
+    --primary: #1C6A9E;
+    --primary-dark: #155a87;
+    --primary-light: #2a7ab3;
+    --secondary: #BCC5CE;
+    --accent: #BCC5CE;
     --dark: #202124;
     --light: #f8f9fa;
     --gray: #5f6368;
     --white: #ffffff;
-    --background: #005B9C;
-    --electric-blue: #00D4FF;
+    --background: #1C6A9E;
+    --electric-blue: #BCC5CE;
 }
 
 * {
@@ -35,9 +35,9 @@ body {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 209, 102, 0.15) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(188, 197, 206, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(188, 197, 206, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(188, 197, 206, 0.15) 0%, transparent 50%);
     z-index: -1;
     overflow: hidden;
 }
@@ -373,7 +373,7 @@ body {
 
 /* Header */
 header {
-    background-color: rgba(0, 91, 156, 0.95);
+    background-color: rgba(28, 106, 158, 0.95);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -520,7 +520,7 @@ header {
 }
 
 .btn-primary:hover {
-    background-color: #e6b800;
+    background-color: #a8b1bb;
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
@@ -642,20 +642,32 @@ header {
     background: rgba(255, 255, 255, 0.15);
 }
 
+.project-img-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
 .project-img {
-    height: 200px;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
+    padding: 15px;
+    overflow: hidden;
 }
 
 .project-img img {
-    max-width: 100%;
-    max-height: 160px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.project-img-link:hover .project-img img {
+    transform: scale(1.05);
 }
 
 .project-content {
@@ -943,7 +955,7 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(0, 91, 156, 0.95);
+        background: rgba(28, 106, 158, 0.95);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         padding: 20px;
         backdrop-filter: blur(10px);
