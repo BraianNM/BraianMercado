@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
         if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            header.style.backgroundColor = 'rgba(26, 115, 232, 0.95)';
+            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.2)';
         } else {
-            header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            header.style.backgroundColor = 'rgba(26, 115, 232, 0.9)';
             header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
         }
     });
@@ -73,5 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinks.classList.remove('active');
             hamburger.classList.remove('active');
         });
+    });
+    
+    // Circuit animation
+    const circuitBg = document.querySelector('.circuit-background');
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', function(e) {
+        mouseX = (e.clientX / window.innerWidth) * 20 - 10;
+        mouseY = (e.clientY / window.innerHeight) * 20 - 10;
+        
+        circuitBg.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
     });
 });
