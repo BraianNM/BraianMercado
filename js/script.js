@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
         if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(0, 91, 156, 0.98)';
+            header.style.backgroundColor = 'rgba(28, 106, 158, 0.98)';
             header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.2)';
         } else {
-            header.style.backgroundColor = 'rgba(0, 91, 156, 0.95)';
+            header.style.backgroundColor = 'rgba(28, 106, 158, 0.95)';
             header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
         }
     });
