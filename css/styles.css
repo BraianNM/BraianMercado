@@ -1,13 +1,14 @@
 :root {
     --primary: #1a73e8;
     --primary-dark: #1557b0;
+    --primary-light: #4285f4;
     --secondary: #34a853;
     --accent: #fbbc04;
     --dark: #202124;
     --light: #f8f9fa;
     --gray: #5f6368;
-    --background: #1a73e8;
     --white: #ffffff;
+    --background: #1a73e8;
 }
 
 * {
@@ -18,10 +19,49 @@
 
 body {
     background-color: var(--background);
-    color: var(--dark);
+    color: var(--white);
     line-height: 1.6;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Fondo con circuitos */
+.circuit-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(66, 133, 244, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(52, 168, 83, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(251, 188, 4, 0.1) 0%, transparent 50%);
+    z-index: -1;
+    opacity: 0.6;
+}
+
+.circuit-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(90deg, transparent 24px, rgba(255,255,255,0.03) 25px, rgba(255,255,255,0.03) 26px, transparent 27px, transparent 74px, rgba(255,255,255,0.03) 75px, rgba(255,255,255,0.03) 76px, transparent 77px),
+        linear-gradient(0deg, transparent 24px, rgba(255,255,255,0.03) 25px, rgba(255,255,255,0.03) 26px, transparent 27px, transparent 74px, rgba(255,255,255,0.03) 75px, rgba(255,255,255,0.03) 76px, transparent 77px);
+    background-size: 100px 100px;
+    animation: circuitMove 20s linear infinite;
+}
+
+@keyframes circuitMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100px 100px;
+    }
 }
 
 .container {
@@ -32,12 +72,13 @@ body {
 
 /* Header */
 header {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(26, 115, 232, 0.9);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 100;
     backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar {
@@ -57,12 +98,14 @@ header {
     height: 50px;
     width: auto;
     border-radius: 8px;
+    background: var(--white);
+    padding: 5px;
 }
 
 .logo-text {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--primary);
+    color: var(--white);
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -73,15 +116,17 @@ header {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--dark);
+    color: var(--white);
     font-weight: 500;
     transition: color 0.3s;
     position: relative;
     font-size: 1rem;
+    opacity: 0.9;
 }
 
 .nav-links a:hover {
-    color: var(--primary);
+    color: var(--accent);
+    opacity: 1;
 }
 
 .nav-links a::after {
@@ -91,7 +136,7 @@ header {
     height: 2px;
     bottom: -5px;
     left: 0;
-    background-color: var(--primary);
+    background-color: var(--accent);
     transition: width 0.3s;
 }
 
@@ -108,7 +153,7 @@ header {
 .hamburger span {
     width: 25px;
     height: 3px;
-    background-color: var(--dark);
+    background-color: var(--white);
     margin: 3px 0;
     transition: 0.3s;
 }
@@ -116,21 +161,9 @@ header {
 /* Hero Section */
 .hero {
     padding: 120px 0;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: var(--white);
     position: relative;
     overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
-    background-size: cover;
+    background: transparent;
 }
 
 .hero-content {
@@ -145,6 +178,7 @@ header {
     line-height: 1.2;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .hero h1 span {
@@ -156,6 +190,7 @@ header {
     margin-bottom: 30px;
     max-width: 600px;
     font-weight: 400;
+    opacity: 0.9;
 }
 
 .hero-buttons {
@@ -186,7 +221,7 @@ header {
 .btn-primary:hover {
     background-color: #e6ac00;
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {
@@ -199,13 +234,16 @@ header {
     background-color: var(--white);
     color: var(--primary);
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* About Section */
 .about {
     padding: 100px 0;
-    background-color: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .section-title {
@@ -215,14 +253,14 @@ header {
 
 .section-title h2 {
     font-size: 2.8rem;
-    color: var(--primary);
+    color: var(--white);
     margin-bottom: 15px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 800;
 }
 
 .section-title p {
-    color: var(--gray);
+    color: rgba(255, 255, 255, 0.8);
     max-width: 600px;
     margin: 0 auto;
     font-size: 1.1rem;
@@ -236,40 +274,41 @@ header {
 }
 
 .service-card {
-    background-color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 40px 30px;
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .service-icon {
     font-size: 3rem;
-    color: var(--primary);
+    color: var(--accent);
     margin-bottom: 25px;
     display: inline-block;
     padding: 20px;
     border-radius: 12px;
-    background-color: rgba(26, 115, 232, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .service-card h3 {
     margin-bottom: 15px;
-    color: var(--dark);
+    color: var(--white);
     font-size: 1.4rem;
     font-weight: 600;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .service-card p {
-    color: var(--gray);
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 400;
     line-height: 1.6;
 }
@@ -277,7 +316,8 @@ header {
 /* Projects Section */
 .projects {
     padding: 100px 0;
-    background-color: #f8fafc;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .projects-grid {
@@ -287,17 +327,18 @@ header {
 }
 
 .project-card {
-    background-color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .project-img {
@@ -305,7 +346,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f8fafc;
+    background: rgba(255, 255, 255, 0.05);
     padding: 20px;
 }
 
@@ -313,6 +354,7 @@ header {
     max-width: 100%;
     max-height: 160px;
     object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 .project-content {
@@ -321,14 +363,14 @@ header {
 
 .project-content h3 {
     margin-bottom: 10px;
-    color: var(--primary);
+    color: var(--accent);
     font-size: 1.4rem;
     font-weight: 700;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .project-content p {
-    color: var(--gray);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 15px;
     font-weight: 400;
     line-height: 1.6;
@@ -336,7 +378,7 @@ header {
 
 .project-link {
     display: inline-block;
-    color: var(--primary);
+    color: var(--accent);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s;
@@ -351,12 +393,12 @@ header {
     height: 2px;
     bottom: -2px;
     left: 0;
-    background-color: var(--primary);
+    background-color: var(--accent);
     transition: width 0.3s;
 }
 
 .project-link:hover {
-    color: var(--secondary);
+    color: var(--white);
 }
 
 .project-link:hover::after {
@@ -366,8 +408,9 @@ header {
 /* Contact Section */
 .contact {
     padding: 100px 0;
-    background-color: var(--white);
+    background: rgba(255, 255, 255, 0.05);
     text-align: center;
+    backdrop-filter: blur(10px);
 }
 
 .contact-info {
@@ -385,29 +428,31 @@ header {
     gap: 10px;
     padding: 30px;
     border-radius: 12px;
-    background-color: var(--white);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s;
     min-width: 200px;
 }
 
 .contact-item:hover {
     transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .contact-icon {
     font-size: 2.5rem;
-    color: var(--primary);
+    color: var(--accent);
 }
 
 .contact-item p:first-of-type {
     font-weight: 600;
-    color: var(--dark);
+    color: var(--white);
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .contact-item p:last-of-type {
-    color: var(--gray);
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 400;
 }
 
@@ -425,16 +470,17 @@ header {
     justify-content: center;
     align-items: center;
     font-size: 1.8rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     z-index: 100;
     transition: all 0.3s;
     text-decoration: none;
     animation: pulse 2s infinite;
+    backdrop-filter: blur(10px);
 }
 
 .whatsapp-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
     animation: none;
 }
 
@@ -452,10 +498,12 @@ header {
 
 /* Footer */
 footer {
-    background-color: var(--dark);
+    background: rgba(0, 0, 0, 0.3);
     color: var(--white);
     padding: 40px 0;
     text-align: center;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-content {
@@ -474,11 +522,13 @@ footer {
     color: var(--white);
     font-size: 1.5rem;
     transition: color 0.3s, transform 0.3s;
+    opacity: 0.8;
 }
 
 .social-links a:hover {
     color: var(--accent);
     transform: translateY(-3px);
+    opacity: 1;
 }
 
 /* Responsive */
@@ -578,9 +628,10 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: white;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        background: rgba(26, 115, 232, 0.95);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         padding: 20px;
+        backdrop-filter: blur(10px);
     }
     
     .nav-links.active {
