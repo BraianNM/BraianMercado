@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
         if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(26, 115, 232, 0.95)';
+            header.style.backgroundColor = 'rgba(0, 91, 156, 0.98)';
             header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.2)';
         } else {
-            header.style.backgroundColor = 'rgba(26, 115, 232, 0.9)';
+            header.style.backgroundColor = 'rgba(0, 91, 156, 0.95)';
             header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
         }
     });
@@ -75,15 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Circuit animation
-    const circuitBg = document.querySelector('.circuit-background');
-    let mouseX = 0;
-    let mouseY = 0;
+    // Circuit animation enhancement
+    const circuitLines = document.querySelectorAll('.circuit-line');
+    const circuitNodes = document.querySelectorAll('.circuit-node');
     
-    document.addEventListener('mousemove', function(e) {
-        mouseX = (e.clientX / window.innerWidth) * 20 - 10;
-        mouseY = (e.clientY / window.innerHeight) * 20 - 10;
-        
-        circuitBg.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    // Add random animation delays for more natural effect
+    circuitLines.forEach((line, index) => {
+        line.style.animationDelay = `${index * 0.5}s`;
+    });
+    
+    circuitNodes.forEach((node, index) => {
+        node.style.animationDelay = `${index * 0.7}s`;
     });
 });
