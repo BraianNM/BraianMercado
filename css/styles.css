@@ -27,7 +27,7 @@ body {
     position: relative;
 }
 
-/* Fondo con circuitos eléctricos */
+/* Fondo con circuitos eléctricos mejorados */
 .circuit-background {
     position: fixed;
     top: 0;
@@ -35,104 +35,258 @@ body {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 209, 102, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 209, 102, 0.15) 0%, transparent 50%);
     z-index: -1;
     overflow: hidden;
 }
 
-/* Líneas de circuitos */
-.circuit-line {
+/* Líneas de circuitos principales */
+.circuit-path {
     position: absolute;
-    background: linear-gradient(90deg, transparent, var(--electric-blue), transparent);
-    animation: electricFlow 3s linear infinite;
+    background: transparent;
 }
 
-.circuit-1 {
-    top: 20%;
+.circuit-path::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--electric-blue), 
+        var(--accent),
+        var(--electric-blue),
+        transparent);
+    animation: electricFlow 4s linear infinite;
+    filter: blur(1px);
+}
+
+.circuit-path-1 {
+    top: 25%;
     left: 10%;
-    width: 30%;
-    height: 2px;
+    width: 200px;
+    height: 100px;
+}
+
+.circuit-path-1::before {
+    top: 0;
+    left: 0;
     animation-delay: 0s;
 }
 
-.circuit-2 {
+.circuit-path-2 {
     top: 60%;
     right: 15%;
-    width: 25%;
-    height: 2px;
+    width: 180px;
+    height: 80px;
+}
+
+.circuit-path-2::before {
+    top: 40px;
+    right: 0;
     animation-delay: 1s;
 }
 
-.circuit-3 {
+.circuit-path-3 {
     top: 40%;
     left: 5%;
-    width: 2px;
-    height: 200px;
-    animation-delay: 0.5s;
-}
-
-.circuit-4 {
-    bottom: 30%;
-    right: 20%;
-    width: 2px;
+    width: 80px;
     height: 150px;
-    animation-delay: 1.5s;
 }
 
-/* Nodos de circuitos */
+.circuit-path-3::before {
+    top: 0;
+    left: 40px;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        transparent, 
+        var(--electric-blue), 
+        var(--accent),
+        var(--electric-blue),
+        transparent);
+    animation: electricFlowVertical 3s linear infinite;
+}
+
+/* Líneas eléctricas con efecto de chispa */
+.electric-line {
+    position: absolute;
+    background: var(--electric-blue);
+    box-shadow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue);
+    animation: electricSpark 2s ease-in-out infinite;
+}
+
+.electric-line-1 {
+    top: 30%;
+    left: 25%;
+    width: 120px;
+    height: 2px;
+    animation-delay: 0.2s;
+}
+
+.electric-line-2 {
+    top: 55%;
+    right: 30%;
+    width: 2px;
+    height: 100px;
+    animation-delay: 0.8s;
+}
+
+.electric-line-3 {
+    bottom: 35%;
+    left: 20%;
+    width: 80px;
+    height: 2px;
+    animation-delay: 1.4s;
+}
+
+.electric-line-4 {
+    top: 45%;
+    right: 25%;
+    width: 2px;
+    height: 80px;
+    animation-delay: 2s;
+}
+
+/* Nodos de circuitos mejorados */
 .circuit-node {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     background: var(--electric-blue);
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue);
-    animation: nodePulse 2s ease-in-out infinite;
+    box-shadow: 
+        0 0 15px var(--electric-blue),
+        0 0 30px var(--electric-blue),
+        0 0 45px var(--electric-blue);
+    animation: nodePulse 3s ease-in-out infinite;
+    z-index: 2;
 }
 
 .node-1 {
-    top: 20%;
-    left: 40%;
+    top: 25%;
+    left: 30%;
     animation-delay: 0s;
 }
 
 .node-2 {
     top: 35%;
     right: 25%;
-    animation-delay: 0.3s;
+    animation-delay: 0.5s;
 }
 
 .node-3 {
     bottom: 40%;
     left: 15%;
-    animation-delay: 0.6s;
+    animation-delay: 1s;
 }
 
 .node-4 {
     bottom: 25%;
     right: 35%;
-    animation-delay: 0.9s;
+    animation-delay: 1.5s;
 }
 
 .node-5 {
     top: 55%;
     left: 30%;
-    animation-delay: 1.2s;
+    animation-delay: 2s;
 }
 
+.node-6 {
+    top: 65%;
+    right: 20%;
+    animation-delay: 2.5s;
+}
+
+/* Conexiones entre nodos */
+.circuit-connection {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, var(--electric-blue), transparent);
+    animation: connectionGlow 4s ease-in-out infinite;
+}
+
+.connection-1 {
+    top: 25%;
+    left: 30%;
+    width: 150px;
+    height: 2px;
+    animation-delay: 0s;
+}
+
+.connection-2 {
+    top: 55%;
+    left: 30%;
+    width: 2px;
+    height: 100px;
+    animation-delay: 1s;
+}
+
+.connection-3 {
+    top: 35%;
+    right: 25%;
+    width: 200px;
+    height: 2px;
+    animation-delay: 2s;
+}
+
+/* Animaciones mejoradas */
 @keyframes electricFlow {
     0% {
-        opacity: 0;
         transform: translateX(-100%);
+        opacity: 0;
     }
-    50% {
+    10% {
+        opacity: 1;
+    }
+    90% {
         opacity: 1;
     }
     100% {
-        opacity: 0;
         transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes electricFlowVertical {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes electricSpark {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scaleX(1);
+    }
+    25% {
+        opacity: 0.8;
+        transform: scaleX(1.2);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1);
+        box-shadow: 
+            0 0 15px var(--electric-blue),
+            0 0 30px var(--accent),
+            0 0 45px var(--electric-blue);
+    }
+    75% {
+        opacity: 0.8;
+        transform: scaleX(0.8);
     }
 }
 
@@ -140,10 +294,74 @@ body {
     0%, 100% {
         transform: scale(1);
         opacity: 0.7;
+        box-shadow: 
+            0 0 15px var(--electric-blue),
+            0 0 30px var(--electric-blue);
     }
     50% {
-        transform: scale(1.3);
+        transform: scale(1.5);
         opacity: 1;
+        box-shadow: 
+            0 0 25px var(--electric-blue),
+            0 0 50px var(--accent),
+            0 0 75px var(--electric-blue);
+    }
+}
+
+@keyframes connectionGlow {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.8;
+        box-shadow: 0 0 20px var(--electric-blue);
+    }
+}
+
+/* Efectos de chispa adicionales */
+.spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: sparkFlash 1s ease-out infinite;
+    pointer-events: none;
+}
+
+.spark-1 {
+    top: 28%;
+    left: 32%;
+    animation-delay: 0.3s;
+}
+
+.spark-2 {
+    top: 38%;
+    right: 28%;
+    animation-delay: 1.2s;
+}
+
+.spark-3 {
+    bottom: 38%;
+    left: 18%;
+    animation-delay: 0.8s;
+}
+
+.spark-4 {
+    bottom: 28%;
+    right: 38%;
+    animation-delay: 1.6s;
+}
+
+@keyframes sparkFlash {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(2);
+        box-shadow: 0 0 10px var(--accent);
     }
 }
 
@@ -676,6 +894,20 @@ footer {
     .hamburger.active span:nth-child(3) {
         transform: rotate(45deg) translate(-5px, -6px);
     }
+    
+    /* Ocultar algunos circuitos en móviles para mejor rendimiento */
+    .circuit-path-3,
+    .electric-line-3,
+    .electric-line-4,
+    .connection-2,
+    .connection-3,
+    .node-4,
+    .node-5,
+    .node-6,
+    .spark-3,
+    .spark-4 {
+        display: none;
+    }
 }
 
 /* Animations */
@@ -719,10 +951,5 @@ footer {
     
     .nav-links.active {
         display: flex;
-    }
-    
-    /* Ocultar algunos circuitos en móviles para mejor rendimiento */
-    .circuit-3, .circuit-4, .node-4, .node-5 {
-        display: none;
     }
 }
