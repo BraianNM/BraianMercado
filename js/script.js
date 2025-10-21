@@ -75,8 +75,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Efectos de circuitos interactivos
+    const circuitBackground = document.querySelector('.circuit-background');
+    
+    // Crear chispas aleatorias
+    function createRandomSpark() {
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+        spark.style.left = Math.random() * 100 + '%';
+        spark.style.top = Math.random() * 100 + '%';
+        spark.style.animationDelay = Math.random() * 2 + 's';
+        spark.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+        
+        circuitBackground.appendChild(spark);
+        
+        // Remover después de la animación
+        setTimeout(() => {
+            spark.remove();
+        }, 2000);
+    }
+    
+    // Crear chispas periódicamente
+    setInterval(createRandomSpark, 500);
+    
+    // Efecto de interacción con el mouse
+    document.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        const nodes = document.querySelectorAll('.circuit-node');
+        nodes.forEach((node, index) => {
+            const rect = node.getBoundingClientRect();
+            const nodeX = rect.left + rect.width / 2;
+            const nodeY = rect.top + rect.height / 2;
+            
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - nodeX, 2) + 
+                Math.pow(e.clientY - nodeY, 2)
+            );
+            
+            if (distance < 150) {
+                node.style.transform = `scale(${2 - distance / 150})`;
+                node.style.filter = `brightness(${1.5 - distance / 300})`;
+            }
+        });
+    });
+    
     // Circuit animation enhancement
-    const circuitLines = document.querySelectorAll('.circuit-line');
+    const circuitLines = document.querySelectorAll('.circuit-path, .electric-line, .circuit-connection');
     const circuitNodes = document.querySelectorAll('.circuit-node');
     
     // Add random animation delays for more natural effect
